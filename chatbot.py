@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
-import configparser
+import os
 import logging
 import redis
 
@@ -14,7 +14,7 @@ def main():
     dispatcher = updater.dispatcher
 
     global redis1
-    redis1 = redis.Redis(host=(config['REDIS']['HOST']), password=(config['REDIS']['PASSWORD']), port=(config['REDIS']['REDISPORT']))
+    redis1 = redis.Redis(host=(os.environ['REDIS']['HOST']), password=(os.environ['REDIS']['PASSWORD']), port=(os.environ['REDIS']['REDISPORT']))
 
     # You can set this logging module, so you will know when and why things do not work as expected
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
